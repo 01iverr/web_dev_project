@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/styles.css">
+  <title> Product Categories </title>
+  <!-- <link rel="icon" type="image/x-icon" href="../media/header-footer/techonomyicon.ico"> -->
+  <script src="../javascript/index.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- ========================== HEADER ========================== -->
+    <header class="wrapper header-wrapper">
+      <div class="header-wrapper header-group">
+        <!-- Logo -->
+        <button id="home-button-image" onclick="window.location.href='index.html';">
+        </button>
+
+        <!-- Search -->
+        <div class="header-wrapper search-bar">
+          <input type="search" id="search-query" name="q" placeholder="Search...">
+          <button id="search-button-image" aria-label="Search button including a magnifying glass icon created by Freepik - Flaticon"></button>
+        </div>
+      </div>
+
+      <div class="header-wrapper header-group">
+        <!-- Shopping Cart -->
+        <button id="cart-button-image" aria-label="Cart button inclusind a shopping cart icon created by Freepik - Flaticon">
+        </button>
+        <!-- User Login -->
+        <button id="login-button-image" aria-label="Login button including a login icon created by Sebastian Belalcazar - Flaticon" onclick="window.location.href='signup.html';">
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================== Main ========================== -->
+    <main id="product-categories-page-components">
+
+      <h1> Categories: </h1>
+      <ul id='categorieslist'>
+
+      </ul>
+    </main>
+    <!-- ========================== FOOTER ========================== -->
+    <footer class="footer-wrapper flex-column">
+      <div class="footer-wrapper footer-main">
+        <div class="footer-wrapper flex-column">
+          <div id="footer-company-info">
+            <p class="footerletters">
+              <a href="aboutus.html"> About us</a> <br>
+              <a href="index.html"> Our company</a><br>
+              <a href="product-categories.html"> Product Categories</a> <br>
+              <a href="support.html"> Technical Support</a> <br>
+            </p>
+          </div>
+
+          <p class="footerletters">
+            <span id="footer-txt-contact">Contact us:</span>
+            <a class="tel" href="tel:+6987654321"> 6987654321</a>
+          </p>
+        </div>
+
+        <div class="footer-wrapper footer-logo-social">
+          <!-- Logo -->
+          <img id="footer-logo" src="../media/header-footer/techonomy-no-bg.png" alt="TECHONOMY logo">
+
+          <!-- Social Media (they currently lead to the main page of each social media) -->
+          <div id="footer-social">
+            <button id="twitter-button-image" onclick=" window.open('http://twitter.com','_blank')" aria-label="Twitter icon created by Bogdan Rosu - Flaticon">
+            </button>
+
+            <button id="instagram-button-image" onclick=" window.open('http://instagram.com','_blank')" aria-label="Instagram icon created by Hight Quality Icons - Flaticon">
+            </button>
+
+            <button id="facebook-button-image" onclick=" window.open('http://facebook.com','_blank')" aria-label="Facebook icon created by Freepik - Flaticon">
+            </button>
+
+            <button id="youtube-button-image" onclick=" window.open('http://youtube.com','_blank')" aria-label="Youtube icon created by Freepik - Flaticon">
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bottom-line">
+        <!-- Slogan -->
+        <img src="../media/header-footer/slogan.png" id="slogan" alt="TECHONOMY slogan">
+      </div>
+
+    </footer>
+  </div>
+</body>
+
+</html>
