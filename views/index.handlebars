@@ -1,0 +1,15 @@
+<main id="index">
+    <h1>Categories</h1>
+    <div id="categories-destination"></div>
+</main>
+
+<script id="categories-template" type="text/x-handlebars-template">
+    \{{#each categories}}
+        <section class="category-section">
+            \{{this.title}}
+            <a href="/category.html?categoryId=\{{this.id}}"><img src="\{{this.img_url}}"></a>
+        </section>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="../javascript/index.js"></script>

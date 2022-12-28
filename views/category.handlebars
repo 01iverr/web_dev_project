@@ -1,0 +1,43 @@
+<main id="category-products">
+    <div id="title"></div>
+    <aside id="filters"></aside>
+    <article id="products"></article>
+</main>
+
+<script id="title-template" type="text/x-handlebars-template">
+    <h1>Product Category: \{{category_title}}</h1>
+</script>
+
+<script id="subcategories-template" type="text/x-handlebars-template">
+    <p>Click bellow to apply filters:</p>
+    <ul id="subcategories-list">
+        <li class="subcategory">
+            <label class="radiochoices" for="all">
+                <input type="radio" id="all" name="subcategory" value="all" checked="checked" onchange="filterProducts()">
+                <p>All</p>
+            </label>
+        </li>
+        \{{#each subcategories}}
+        <li class="subcategory">
+            <label class="radiochoices" for="\{{this.title}}">
+                <input type="radio" id="\{{this.title}}" name="subcategory" value="\{{this.title}}" onchange="filterProducts()">
+                <p>\{{this.title}}</p>
+            </label>
+        </li>
+        \{{/each}}
+    </ul>
+</script>
+
+
+<script id="product-template" type="text/x-handlebars-template">
+    \{{#each products}}
+        <div class="product">
+            <h2>\{{this.title}}</h2>
+            <img src="\{{this.image}}" width="200px">
+            \{{this.description}}
+            <div id="price">\{{this.cost}}</div>
+        </div>
+    \{{/each}}
+</script>
+
+<script type="text/javascript" src="../javascript/category.js"></script>

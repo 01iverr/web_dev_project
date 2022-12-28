@@ -31,49 +31,59 @@ app.use(express.json());
 // use corse with headers
 app.use(cors(origin="https://wiki-shop.onrender.com/"));
 
-// serve index.html as content root
-app.get('/', (req, res) => {
+// var categories;
 
-    // var options = {
-    //     root: path.join(__dirname, 'public')
+app.get('/index.html', (req, res) => {
+    res.render("index");
+    console.log("[ Rendered categories (index) page. ]")
+});
+
+app.get('/category.html', (req, res) => {
+
+    const originalurl = req.originalUrl;
+    paths = originalurl.split("/");
+    category_id = paths[2];
+
+    // console.log(`[ Accessing page for products in category ${category_id} ]`);
+    
+    // let myHeaders = new Headers();
+    // myHeaders.append('Accept', 'application/json');
+
+    // let init = {
+    //     method: "GET",
+    //     headers: myHeaders
     // }
 
-    // res.sendFile('html/index.html', options, function(err){
-    //     console.log(err)
-    // })
+    // const url = "https://wiki-shop.onrender.com/categories/"+category_id+"/products";
+
+    // let category_title = categories[category_id];
+
+    // fetch(url, init)
+    //     .then(response => {
+    //         if (response.status == 200) {
+    //             return response.json();
+    //         } else {
+    //             console.log("[!] Something went wrong [!]");
+    //         }
+    //     })
+    //     .then((data) => {
+    //         res.render("category", { 
+    //             page_title: "Products - "+category_title,
+    //             category_title: category_title,
+    //             products: data,
+    //         });
+    //         console.log("[ Rendered products ("+category_title+") page. ]")
+    //     })
+    //     .catch((err) => {
+	// 		console.log(err);
+	// 	});
 
 
-    let myHeaders = new Headers();
-    myHeaders.append('Accept', 'application/json');
+    // ##################
+    
 
-    let init = {
-        method: "GET",
-        headers: myHeaders
-    }
-
-    const url = "https://wiki-shop.onrender.com/categories/";
-
-    fetch(url, init)
-        .then(response => {
-            if (response.status == 200) {
-                return response.json();
-            } else {
-                console.log("[!] Something went wrong [!]");
-            }
-        })
-        .then((data) => {
-            res.render("categories", { 
-                page_title: "Product Categories",
-                categories: data 
-            });
-            console.log("[ Rendered categories page. ]")
-        })
-        .catch((err) => {
-			console.log(err);
-		});
-
-    // res.render("categories");
-    // console.log("[ Rendered categories page. ]")
+    res.render("category");
+    console.log(`[ Rendered page for products in category ${category_id}. ]`)
 });
 
 app.listen(port, () => console.log('App listening to port',port));
