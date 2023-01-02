@@ -39,6 +39,28 @@
 
     <!-- ========================== Main ========================== -->
 
+    <br>
+    <form method="POST" id="signin-form" novalidate>
+        <fieldset id="signin-registration-form">
+            <legend>Sign in</legend>
+
+            <div class="input-username" id="username-input">
+                <label for="username-txt">Username<abbr title="Necessary Field">(*)</abbr>:</label>
+                <input type="username" id="profile-username" name="signin_Username" placeholder="Username" required>
+            </div>
+
+            <div class="input-password" id="password-input">
+                <label for="password-txt">Password<abbr title="Necessary Field">(*)</abbr>:</label>
+                <input type="password" id="profile-password" name="signin_Password" required>
+            </div>
+
+        </fieldset>
+
+        <div class="buttons" id="signin-buttons">
+            <input type="submit" id="button-login-submit" name="submit">
+        </div>
+    </form>
+
     {{{body}}}
 
     <!-- ========================== FOOTER ========================== -->
