@@ -22,7 +22,7 @@ function fetchCategories() {
             if (response.status == 200) {
                 return response.json();
             } else {
-                console.log("[!] Something went wrong [!]");
+                console.log("[ Something went wrong ]");
             }
         })
         .then((data) => {

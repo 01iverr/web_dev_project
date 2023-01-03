@@ -8,8 +8,8 @@ const uri = "mongodb+srv://AuebServer:AuebServer@auebserver.ittbh9s.mongodb.net/
 // var client = new mongoClient(uri);
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-var usersDB = client.db("users-db");
-var users = usersDB.collection("users");
+var usersDB = client.db("Data");
+var users = usersDB.collection("Users");
 
 module.exports = {
     client,

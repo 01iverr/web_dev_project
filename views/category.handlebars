@@ -1,4 +1,29 @@
 <main id="category-products">
+    <br><br><br>
+    <form method="POST" id="signin-form" novalidate>
+        <fieldset id="signin-registration-form">
+            <legend>Sign in</legend>
+
+            <div class="input-username" id="username-input">
+                <label for="profile-username">
+                  Username<abbr title="Necessary Field">(*)</abbr>:
+                </label>
+                <input type="username" id="profile-username" name="signin_Username" placeholder="Username" required>
+            </div>
+
+            <div class="input-password" id="password-input">
+                <label for="profile-password">
+                  Password<abbr title="Necessary Field">(*)</abbr>:
+                </label>
+                <input type="password" id="profile-password" name="signin_Password" required>
+            </div>
+
+        </fieldset>
+
+        <div class="buttons" id="signin-buttons">
+            <input type="submit" id="button-login-submit" name="submit">
+        </div>
+    </form>
     <div id="title"></div>
     <aside id="filters"></aside>
     <article id="products"></article>
@@ -41,3 +66,4 @@
 </script>
 
 <script type="text/javascript" src="../javascript/category.js"></script>
+<script type="text/javascript" src="../javascript/signin.js"></script>

@@ -36,7 +36,7 @@ function fetchCategories(category_id) {
             if (response.status == 200) {
                 return response.json();
             } else {
-                console.log("[!] Something went wrong [!]");
+                console.log("[ Something went wrong ]");
             }
         })
         .then((data) => {
@@ -78,12 +78,11 @@ function fetchSubCategories(category_id) {
             if (response.status == 200) {
                 return response.json();
             } else {
-                console.log("[!] Something went wrong [!]");
+                console.log("[ Something went wrong ]");
             }
         })
         .then((data) => {
             subcategories = data;
-            // console.log(subcategories); // TODO: remove
 
             const html = template({
                 subcategories: data,
@@ -118,7 +117,7 @@ function fetchProducts(category_id) {
             if (response.status == 200) {
                 return response.json();
             } else {
-                console.log("[!] Something went wrong [!]");
+                console.log("[ Something went wrong ]");
             }
         })
         .then((data) => {

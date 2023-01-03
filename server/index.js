@@ -7,7 +7,7 @@ const path = require('path');
 const client = mongodb.client;
 const handlebars = require('express-handlebars');
 const port = 8080;
-
+const { v4: uuidv4 } = require('uuid');
 
 var dao = new DAO();
 
@@ -26,33 +26,37 @@ app.get('/user/:Username', function (req, res) {
   }
 });
 
-app.post('/index.html', function (req, res) {
-  console.log("--- signin in index.js");
+app.post('/category.html', function (req, res) {
 
   let contenType = req.header('Content-Type');
 
   if (contenType === 'application/json') {
 
-    console.log("New POST request with content: ", req.body);
-    console.log("----",req.body.Username); //TODO remove
+    console.log("[ New POST request with content:]");
+    console.log(req.body);
     dao.isUserWithUsername(req.body.Username)
       .then(result => {
-        console.log("----here"); //TODO remove
         if (result) { //there is a user with this Username
           dao.findUserByUsername(req.body.Username)
             .then(userResult => {
-              if (userResult[0].password === req.body.Password) { //correct password
-                console.log("Sign-in ok. Status 202.");
-                res.status(202).send({ msg: "Users credential are correct" });
+              if (userResult[0].Password == req.body.Password) { //correct password
+                // Successful sign in
+                console.log("[ Sign-in ok. Status 202. ]");
+                let sessionId = uuidv4();
+                console.log(`[ Session ID generated: ${sessionId} ]`);
+                res.status(202).send({ msg: "User's credential are correct", sessionId: sessionId  });
+
+                // Update database
+                dao.updateSessionId(req.body.Username, sessionId);
               }
               else { //false password
-                console.log("Sign-in not ok. Status 410.");
-                res.status(410).send({ msg: "Users credential are not correct" });
+                console.log("[ Sign-in not ok. Status 410. ]");
+                res.status(410).send({ msg: "User's credential are not correct" });
               }
             })
         }
         else { //no user with this Username
-          console.log("Username does not match with  any users! Status 411.");
+          console.log("[ Username does not match with  any users! Status 411. ]");
           res.status(411).send({ msg: "There is no such user with this Username!" });
         }
       })

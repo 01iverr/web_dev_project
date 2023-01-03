@@ -1,4 +1,4 @@
-const urlPOST = "http://localhost:8080/index.html"
+const urlPOST = "http://localhost:8080/category.html"
 const urlGET = "http://localhost:8080/user/"
 
 window.onload = init;
@@ -8,11 +8,12 @@ function init() {
     const UsernameInput =  document.getElementById('profile-username');
     const password = document.getElementById('profile-password');
 
+    // On submit button click
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         const UsernameValue = UsernameInput.value.trim();
         const passwordValue = password.value.trim();
-        console.log("Submission button clicked!")
+        console.log("[ Submission button clicked. ]")
 
         if ( checkInput(UsernameValue)&&checkInput(passwordValue) ) {
             let status = "201";
@@ -20,33 +21,45 @@ function init() {
                 Username: UsernameValue,
                 Password: passwordValue,
             }
-            console.log(userdata);
+            
             sendPostRequest(userdata)
                 .then(response => {
-                    console.log("--- after sendPostRequest");
                     status = response.status;
                     return response.json();
                 })
                 .then(responseMsg => {
-                    console.log("--- after then");
-                    console.log(responseMsg)
-                    console.log(status)
-                    //showAlertBox();
+                    console.log('[ Response Message: ]')
+                    console.log(responseMsg);
                     if (status == "202") {
-                        //Success
+                        // Successful sign in
+                        console.log(`[ Status received: ${status} ]`);
+                        let sessionId = responseMsg.sessionId;
+                        
+                        // Pass session id to url as parameter(without reloading page)
+                        var url = new URL(window.location.href);
+                        url.searchParams.append('sessionId', sessionId);
+                        console.log(`[ New url: ${url} ]`)
+                        
+                        const nextURL = url;
+                        const nextTitle = 'Category';
+                        const nextState = { additionalInformation: 'Updated the URL with JS' };
+
+                        // create a new entry in the browser's history, without reloading
+                        window.history.pushState(nextState, nextTitle, nextURL);
+                        // replace the current entry in the browser's history, without reloading
+                        window.history.replaceState(nextState, nextTitle, nextURL);
                     }
                     else {
-                        console.log("Something went wrong!!");
+                        console.log("[ Something went wrong ]");
                     }
-                    console.log(responseMsg.msg)
+                    console.log(`[ ${responseMsg.msg} ]`)
                 })
                 .catch(error => {
-                    console.log("Fetch error:", error);
+                    console.log(`[ Fetch error: ${error} ]`);
                 });
         }
     });
 }
-
 
 
 function checkInput(input) {
@@ -62,8 +75,6 @@ function sendPostRequest(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     myHeaders.append('Accept', 'application/json');
-    console.log(data);
-    console.log(typeof data);
     let init = {
         method: 'POST',
         headers: myHeaders,
