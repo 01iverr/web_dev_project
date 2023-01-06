@@ -1,4 +1,3 @@
-const User = require('./user');
 const mongodb = require('./mongodb');
 
 const users = mongodb.users;
@@ -53,25 +52,51 @@ class DAO {
      */
     updateSessionId(username, sessionId) {
         this.findUserByUsername(username)
-            .then(userResult => {
-                let user = userResult[0];
-                console.log(`[ Editing session id of user with id ="${user._id}" in database ]`);
+        .then(userResult => {
+            let user = userResult[0];
+            console.log(`[ Editing session id of user "${username}" with id="${user._id}" in database ]`);
 
-                const filter = { _id: user._id };
-                const updateDocument = {
-                    $set: {
-                        SessionId: sessionId,
-                    },
-                };
-                this.users.updateOne(filter, updateDocument)
-                    .then(result => {
-                        console.log("[ Results from database edit: ]");
-                        console.log(result);
-                    })
-                
+            const filter = { _id: user._id };
+            const updateDocument = {
+                $set: {
+                    SessionId: sessionId,
+                },
+            };
+            this.users.updateOne(filter, updateDocument)
+            .then(result => {
+                console.log("[ Results from database edit: ]");
+                console.log(result);
             })
+            
+        })
 
-        
+    }
+
+    /**
+     * Update cart data in database for user.
+     * @param {String} username username of user to be edited
+     * @param {String} newcart new cart
+     */
+    updateCart(username, newcart) {
+        this.findUserByUsername(username)
+        .then(userResult => {
+            let user = userResult[0];
+            console.log(`[ Editing cart of user "${username}" with id="${user._id}" in database ]`);
+
+            const filter = { _id: user._id };
+            const updateDocument = {
+                $set: {
+                    CartProd: newcart,
+                },
+            };
+            this.users.updateOne(filter, updateDocument)
+            .then(result => {
+                console.log("[ Results from database edit: ]");
+                console.log(result);
+            })
+            
+        })
+
     }
 }
 

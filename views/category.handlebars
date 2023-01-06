@@ -18,6 +18,8 @@
                 <input type="password" id="profile-password" name="signin_Password" required>
             </div>
 
+            <div id="login-message"></div>
+
         </fieldset>
 
         <div class="buttons" id="signin-buttons">
@@ -61,8 +63,15 @@
             <img src="\{{this.image}}" width="200px">
             \{{this.description}}
             <div id="price">\{{this.cost}}</div>
+            <button type="button" onclick="addToCart(\{{this.id}})">Add to Cart</button> 
         </div>
     \{{/each}}
+</script>
+
+<script id="login-message-template" type="text/x-handlebars-template">
+    \{{#if login_attempt}}
+        <p id="login-result">\{{login_message}}</p>
+    \{{/if}}
 </script>
 
 <script type="text/javascript" src="../javascript/category.js"></script>

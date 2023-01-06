@@ -15,44 +15,55 @@ function init() {
         const passwordValue = password.value.trim();
         console.log("[ Submission button clicked. ]")
 
+        let success_login; // boolean: successful/failed login
+
         if ( checkInput(UsernameValue)&&checkInput(passwordValue) ) {
-            let status = "201";
+            let status;
             let userdata = {
                 Username: UsernameValue,
                 Password: passwordValue,
             }
             
-            sendPostRequest(userdata)
-                .then(response => {
-                    status = response.status;
-                    return response.json();
-                })
-                .then(responseMsg => {
-                    console.log('[ Response Message: ]')
-                    console.log(responseMsg);
-                    if (status == "202") {
-                        // Successful sign in
-                        console.log(`[ Status received: ${status} ]`);
-                        let sessionId = responseMsg.sessionId;
-                        
-                        // Pass session id to url as parameter(without reloading page)
-                        var url = new URL(window.location.href);
-                        url.searchParams.append('sessionId', sessionId);
-                        console.log(`[ New url: ${url} ]`)
-                        
-                        const nextURL = url;
-                        const nextTitle = 'Category';
-                        const nextState = { additionalInformation: 'Updated the URL with JS' };
+            sendPostRequestLogin(userdata)
+            .then(response => {
+                status = response.status;
+                return response.json();
+            })
+            .then(responseMsg => {
+                console.log('[ Response Message: ]')
+                console.log(responseMsg);
+                if (status == "201") {
+                    // Successful sign in
+                    console.log(`[ Status received: ${status} ]`);
+                    let sessionId = responseMsg.sessionId;
+                    let username = responseMsg.username;
+                    
+                    // Pass username and session id to url as parameters (without reloading page)
+                    var url = new URL(window.location.href);
+                    url.searchParams.append('username', username);
+                    url.searchParams.append('sessionId', sessionId);
+                    console.log(`[ New url: ${url} ]`)
 
-                        // create a new entry in the browser's history, without reloading
-                        window.history.pushState(nextState, nextTitle, nextURL);
-                        // replace the current entry in the browser's history, without reloading
-                        window.history.replaceState(nextState, nextTitle, nextURL);
-                    }
-                    else {
-                        console.log("[ Something went wrong ]");
-                    }
-                    console.log(`[ ${responseMsg.msg} ]`)
+                    const nextURL = url;
+                    const nextTitle = 'Category';
+                    const nextState = { additionalInformation: 'Updated the URL with JS' };
+
+                    // create a new entry in the browser's history, without reloading
+                    window.history.pushState(nextState, nextTitle, nextURL);
+                    // replace the current entry in the browser's history, without reloading
+                    window.history.replaceState(nextState, nextTitle, nextURL);
+
+                    success_login = true;
+                }
+                else {
+                    console.log("[ Something went wrong ]");
+                    success_login = false;
+                }
+                console.log(`[ ${responseMsg.msg} ]`)
+
+                // Show message on screen (Successul/Failed login)
+                showMessage(success_login);
+
                 })
                 .catch(error => {
                     console.log(`[ Fetch error: ${error} ]`);
@@ -71,14 +82,35 @@ function checkInput(input) {
     return flag;
 }
 
-function sendPostRequest(data) {
+function sendPostRequestLogin(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
     myHeaders.append('Accept', 'application/json');
+    data.post_type = "login";
     let init = {
         method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(data)
     };
     return fetch(urlPOST, init);
+}
+
+function showMessage(success) {
+    let destination = document.getElementById('login-message');
+
+    let source = document.getElementById('login-message-template').innerHTML;
+    let template = Handlebars.compile(source);
+
+    let login_message;
+    if (success) {
+        login_message = "Successful login!"
+    } else {
+        login_message = "Failed login!"
+    }
+
+    const html = template({ 
+        login_attempt: true,
+        login_message: login_message,
+    });
+    destination.innerHTML = html;
 }

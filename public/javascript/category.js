@@ -167,4 +167,76 @@ function filterProducts() {
     destination.innerHTML = html;
 }
 
+function addToCart(product_id) {
+    // Get product data with product id
+    let product;
+    for (p of products){
+        if (p.id == product_id){
+            product = p;
+        }
+    }
+
+    // Get user login data from url
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let username = urlParams.get("username");
+    let sessionId = urlParams.get("sessionId");
+
+    // Check user is logged in
+    if (!username || !sessionId) {
+        showMessageAddToCart("Please login to add products to cart.");
+        return;
+    }
+
+    // Add item to cart
+    console.log(`[ User "${username}" with session id "${sessionId}" trying to buy "${product.title}" ]`)
+    
+    let data = {
+        username: username,
+        sessionId: sessionId,
+        product: product,
+    }
+    let status;
+
+    sendPostRequestAddToCart(data)
+    .then(response => {
+        status = response.status;
+        return response.json();
+    })
+    .then(responseMsg => {
+        if (status == "202") {
+            // Successfully added item to cart
+            console.log(`[ Status received: ${status} ]`);
+            showMessageAddToCart(`Product "${product.title}" has been added to cart!`);
+        }
+        else {
+            console.log("[ Something went wrong ]");
+            showMessageAddToCart(`Product "${product.title}" couldn't be added to cart`);
+        }
+        console.log(`[ ${responseMsg.msg} ]`)
+    });
+        
+}
+
+function sendPostRequestAddToCart(data) {
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Accept', 'application/json');
+    data.post_type = "add_to_cart";
+    let init = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(data)
+    };
+    return fetch(urlPOST, init);
+}
+
+/**
+ * Message to show after add to cart button press.
+ * @param {String} message message to show
+ */
+function showMessageAddToCart(message) {
+    alert(message);
+}
+
 init();
