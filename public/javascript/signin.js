@@ -40,8 +40,8 @@ function init() {
                     
                     // Pass username and session id to url as parameters (without reloading page)
                     var url = new URL(window.location.href);
-                    url.searchParams.append('username', username);
-                    url.searchParams.append('sessionId', sessionId);
+                    url.searchParams.set('username', username);
+                    url.searchParams.set('sessionId', sessionId);
                     console.log(`[ New url: ${url} ]`)
 
                     const nextURL = url;
@@ -54,6 +54,16 @@ function init() {
                     window.history.replaceState(nextState, nextTitle, nextURL);
 
                     success_login = true;
+
+                    // update count of items in cart
+                    console.log("[ Updating count of items in cart for user with data: ]");
+                    let data = {
+                        username: username,
+                        sessionId: sessionId,
+                    };
+                    console.log(data);
+                    
+                    showCartItemsCount(data); // update items count in cart, to show on page
                 }
                 else {
                     console.log("[ Something went wrong ]");
@@ -64,10 +74,10 @@ function init() {
                 // Show message on screen (Successul/Failed login)
                 showMessage(success_login);
 
-                })
-                .catch(error => {
-                    console.log(`[ Fetch error: ${error} ]`);
-                });
+            })
+            .catch(error => {
+                console.log(`[ Fetch error: ${error} ]`);
+            });
         }
     });
 }

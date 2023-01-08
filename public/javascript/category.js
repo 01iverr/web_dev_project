@@ -9,9 +9,68 @@ function init() {
     let category_id = urlParams.get("categoryId");
 
     // Fetch Data and load to page
+    showCartItemsCount();
     fetchCategories(category_id);
     fetchSubCategories(category_id);
     fetchProducts(category_id);
+}
+
+/**
+ * Get total number of items in user's cart (if logged in), and show on page.
+ */
+function showCartItemsCount() {
+    let destination = document.getElementById('num-items-in-cart');
+    let source = document.getElementById('num-items-in-cart-template').innerHTML;
+    let template = Handlebars.compile(source);
+
+    // Get user login data from url
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    let username = urlParams.get("username");
+    let sessionId = urlParams.get("sessionId");
+
+    // Check user is logged in
+    if (!username || !sessionId) {
+        console.log("[ User not logged in: can't count items in cart ]");
+        // User isn't logged in, 0 items in cart.
+        const html = template({
+            num_items_in_cart: 0,
+        });
+        destination.innerHTML = html;
+        return;
+    }
+
+    // User is logged in
+
+    console.log("[ User logged in: getting count of items in cart.. ]");
+        
+    let data = {
+        username: username,
+        sessionId: sessionId,
+    }
+    let status;    
+
+    sendPostRequestCartItemsCount(data) // request number of items in user's cart
+    .then(response => {
+        status = response.status;
+        return response.json();
+    })
+    .then(data => {
+        if (status == "203") {
+            let num_items_in_cart = data.size;
+            console.log(`[ Data received: ${num_items_in_cart} in ${username}'s cart ]`);
+
+            const html = template({
+                num_items_in_cart: num_items_in_cart,
+            });
+            destination.innerHTML = html;
+        }
+        else {
+            console.log("[ Something went wrong while getting count of items in cart. ]");
+        }
+        console.log(`[ (${status}) ${data.msg} ]`)
+    });
+
 }
 
 function fetchCategories(category_id) {
@@ -208,6 +267,7 @@ function addToCart(product_id) {
             // Successfully added item to cart
             console.log(`[ Status received: ${status} ]`);
             showMessageAddToCart(`Product "${product.title}" has been added to cart!`);
+            showCartItemsCount();
         }
         else {
             console.log("[ Something went wrong ]");
@@ -218,6 +278,27 @@ function addToCart(product_id) {
         
 }
 
+/**
+ * Post request for receiving total number of items in user's cart
+ * @param {json} data json including username and session id for user
+ */
+function sendPostRequestCartItemsCount(data) {
+    let myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Accept', 'application/json');
+    data.post_type = "num_items_in_cart";
+    let init = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(data)
+    };
+    return fetch(urlPOST, init);
+}
+
+/**
+ * Post request for adding a new item to user's cart
+ * @param {json} data json including username, session id for user and product data
+ */
 function sendPostRequestAddToCart(data) {
     let myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');

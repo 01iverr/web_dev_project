@@ -1,5 +1,9 @@
 <main id="category-products">
     <br><br><br>
+    <button id="view-cart">
+        {{!-- <img id="add-to-cart-img" src="../media/catehory/shopping-cart.png" alt="A shopping cart icon created by Freepik - Flaticon"> --}}
+        <div id="num-items-in-cart"></div>
+    </button>
     <form method="POST" id="signin-form" novalidate>
         <fieldset id="signin-registration-form">
             <legend>Sign in</legend>
@@ -30,6 +34,10 @@
     <aside id="filters"></aside>
     <article id="products"></article>
 </main>
+
+<script id="num-items-in-cart-template" type="text/x-handlebars-template">
+    <p>(\{{num_items_in_cart}})</p>
+</script>
 
 <script id="title-template" type="text/x-handlebars-template">
     <h1>Product Category: \{{category_title}}</h1>

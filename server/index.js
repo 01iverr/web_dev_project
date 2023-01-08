@@ -85,6 +85,10 @@ app.post('/category.html', function (req, res) {
                 console.log("[ Post-Request: add to cart ]");
                 post_req_add_to_cart(req, res);
                 break;
+            case "num_items_in_cart":
+                console.log("[ Post-Request: number of items in cart ]");
+                post_req_num_items_cart(req, res);
+                break;
             default:
                 console.log("[ INVALID post request. ]");
         }
@@ -98,10 +102,7 @@ app.post('/category.html', function (req, res) {
 /**
  * Handle Post request for user login.
  */
-function post_req_login(req, res){
-    console.log(typeof req);
-    console.log(typeof res);
-    
+function post_req_login(req, res){    
     let body = req.body;
 
     console.log("[ New POST request with content:]");
@@ -251,5 +252,73 @@ function post_req_add_to_cart(req, res){
     .catch(error => {
         console.log(`[ Fetch error: ${error} ]`);
         res.status(520).send({ msg: "An error occured while fetching user data" });
+    }); 
+}
+
+/**
+ * Handle Post request for getting number of items in cart for logged in user.
+ */
+function post_req_num_items_cart(req, res){
+    let body = req.body;
+    let username = body.username;
+    let sessionId = body.sessionId;
+    let user;
+
+    // Check if valid user
+    console.log(`[ Checking authentication for user "${username}".. ]`);
+    dao.isUserWithUsername(username)
+    .then(exists => {
+        if (!exists){
+            console.log("[ Status received: 430 ]\n[ Invalid username given for 'Number of items in cart'. ]");
+            res.status(430).send({ 
+                msg: "Invalid user data given for 'Number of items in cart'.", 
+                sessionId: sessionId, 
+                username: username 
+            });
+            return;
+        }
+        return dao.findUserByUsername(username);
+    })
+    .then(userResult => {
+        // Check if valid session id
+        user = userResult[0];
+        console.log(`[ Checking session id for user "${user.Username}" ]`);
+        if (sessionId !== user.SessionId){
+            console.log(`[ Status received: 430 ]\n[ Invalid session id given for 'Number of items in cart'. ]`);
+            res.status(430).send({ 
+                msg: "Invalid user data given for 'Number of items in cart'.", 
+                sessionId: sessionId, 
+                username: username 
+            });
+            return;
+        }
+
+        console.log(`[ User ${username} has been successfully authenticated. ]`);
+        let cart = user.CartProd;
+
+        if (cart == ""){
+            cart = '{\
+                "cartItems": [],\
+                "totalCost": 0\
+            }';
+        }
+
+        let cartItems = JSON.parse(cart)["cartItems"];
+
+        // Find total number of items in cart and send to client
+        console.log("[ Received user's cart items: ]");
+        console.log(cartItems);
+
+        let cartSize = 0;
+        for (product of cartItems) {
+            cartSize += product["quantity"];
+        }
+        console.log(`[ ${cartSize} items in user's cart. ]`);
+        res.status(203).send({ msg: "User's cart items count received.", size: cartSize });
+
+    })
+    .catch(error => {
+        console.log(`[ Fetch error: ${error} ]`);
+        res.status(530).send({ msg: "An error occured while fetching user data" });
     }); 
 }
