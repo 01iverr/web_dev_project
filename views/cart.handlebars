@@ -1,0 +1,30 @@
+<main id="Cart-Products">
+  <h1> Cart </h1>
+  <div id = "products-cart"> </div>
+</main>
+
+  <script id="prodcat-template" type="text/x-handlebars-template">
+    \{{#if login}}
+        <table>
+        <thead>
+          <tr>
+            \{{#each details}}
+              <th>\{{this}}</th
+            \{{/each}}
+          </tr>
+        </thead>
+        <tbody>
+          \{{#each products}}
+            <tr>
+                <td>\{{this.title}}</td>
+                <td>\{{this.cost}}</td>
+                <td>\{{this.quantity}}</td>
+            </tr>
+          \{{/each}}
+        </tbody>
+        </table>
+        <p> Total cost : \{{totalcost}} </p>
+    \{{/if}}
+  </script>
+
+<script type="text/javascript" src="../javascript/cart.js"></script>

@@ -1,4 +1,5 @@
 const sourceurl = "https://wiki-shop.onrender.com/";
+const urlGET = "http://localhost:8080/";
 var subcategories;
 var products;
 
@@ -43,12 +44,12 @@ function showCartItemsCount() {
     // User is logged in
 
     console.log("[ User logged in: getting count of items in cart.. ]");
-        
+
     let data = {
         username: username,
         sessionId: sessionId,
     }
-    let status;    
+    let status;
 
     sendPostRequestCartItemsCount(data) // request number of items in user's cart
     .then(response => {
@@ -108,7 +109,7 @@ function fetchCategories(category_id) {
                 page_title: title,
             });
             destination.innerHTML = html;
-            
+
         })
         .catch((err) => {
 			console.log(err);
@@ -130,7 +131,7 @@ function fetchSubCategories(category_id) {
     let template = Handlebars.compile(source);
 
     // url to fetch
-    const url = sourceurl+"categories/"+category_id+"/subcategories";
+  const url = sourceurl + "categories/" + category_id + "/subcategories";
 
     fetch(url, init)
         .then(response => {
@@ -147,7 +148,7 @@ function fetchSubCategories(category_id) {
                 subcategories: data,
             });
             destination.innerHTML = html;
-            
+
         })
         .catch((err) => {
 			console.log(err);
@@ -182,8 +183,8 @@ function fetchProducts(category_id) {
         .then((data) => {
             products = data;
 
-            const html = template({ 
-                products: data,
+            const html = template({
+              products: data,
             });
             destination.innerHTML = html;
 
@@ -220,7 +221,7 @@ function filterProducts() {
         }
     }
 
-    const html = template({ 
+    const html = template({
         products: final_products,
     });
     destination.innerHTML = html;
@@ -249,7 +250,7 @@ function addToCart(product_id) {
 
     // Add item to cart
     console.log(`[ User "${username}" with session id "${sessionId}" trying to buy "${product.title}" ]`)
-    
+
     let data = {
         username: username,
         sessionId: sessionId,
@@ -275,7 +276,7 @@ function addToCart(product_id) {
         }
         console.log(`[ ${responseMsg.msg} ]`)
     });
-        
+
 }
 
 /**
@@ -318,6 +319,17 @@ function sendPostRequestAddToCart(data) {
  */
 function showMessageAddToCart(message) {
     alert(message);
+}
+
+
+function goToCart() {
+  // Get user login data from url
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let username = urlParams.get("username");
+  let sessionId = urlParams.get("sessionId");
+
+  window.location.href = urlGET+"cart.html?username="+username+"&sessionId="+sessionId;
 }
 
 init();

@@ -1,6 +1,6 @@
 <main id="category-products">
     <br><br><br>
-    <button id="view-cart">
+    <button id="view-cart" onclick="goToCart()">
         {{!-- <img id="add-to-cart-img" src="../media/catehory/shopping-cart.png" alt="A shopping cart icon created by Freepik - Flaticon"> --}}
         <div id="num-items-in-cart"></div>
     </button>
@@ -71,7 +71,7 @@
             <img src="\{{this.image}}" width="200px">
             \{{this.description}}
             <div id="price">\{{this.cost}}</div>
-            <button type="button" onclick="addToCart(\{{this.id}})">Add to Cart</button> 
+            <button type="button" onclick="addToCart(\{{this.id}})">Add to Cart</button>
         </div>
     \{{/each}}
 </script>

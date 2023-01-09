@@ -1,5 +1,4 @@
 const urlPOST = "http://localhost:8080/category.html"
-const urlGET = "http://localhost:8080/user/"
 
 window.onload = init;
 
@@ -23,7 +22,7 @@ function init() {
                 Username: UsernameValue,
                 Password: passwordValue,
             }
-            
+
             sendPostRequestLogin(userdata)
             .then(response => {
                 status = response.status;
@@ -37,7 +36,7 @@ function init() {
                     console.log(`[ Status received: ${status} ]`);
                     let sessionId = responseMsg.sessionId;
                     let username = responseMsg.username;
-                    
+
                     // Pass username and session id to url as parameters (without reloading page)
                     var url = new URL(window.location.href);
                     url.searchParams.set('username', username);
@@ -62,7 +61,7 @@ function init() {
                         sessionId: sessionId,
                     };
                     console.log(data);
-                    
+
                     showCartItemsCount(data); // update items count in cart, to show on page
                 }
                 else {
@@ -118,7 +117,7 @@ function showMessage(success) {
         login_message = "Failed login!"
     }
 
-    const html = template({ 
+    const html = template({
         login_attempt: true,
         login_message: login_message,
     });
