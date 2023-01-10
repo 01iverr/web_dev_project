@@ -39,7 +39,7 @@ function init() {
       return response.json();
     })
     .then(data => {
-      if (status == "203") {
+      if (status == "200") {
         let cart = data.cart;
         console.log(`[ Data received: ${cart} in ${username}'s cart ]`);
         let detail= ["Name","Cost","Quantity"];

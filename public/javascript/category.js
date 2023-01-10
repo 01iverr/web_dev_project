@@ -1,5 +1,6 @@
 const sourceurl = "https://wiki-shop.onrender.com/";
 const urlGET = "http://localhost:8080/";
+const urlPOST = "http://localhost:8080/category.html";
 var subcategories;
 var products;
 
@@ -57,7 +58,7 @@ function showCartItemsCount() {
         return response.json();
     })
     .then(data => {
-        if (status == "203") {
+        if (status == "200") {
             let num_items_in_cart = data.size;
             console.log(`[ Data received: ${num_items_in_cart} in ${username}'s cart ]`);
 
@@ -68,6 +69,10 @@ function showCartItemsCount() {
         }
         else {
             console.log("[ Something went wrong while getting count of items in cart. ]");
+            const html = template({
+                num_items_in_cart: 0,
+            });
+            destination.innerHTML = html;
         }
         console.log(`[ (${status}) ${data.msg} ]`)
     });
@@ -264,7 +269,7 @@ function addToCart(product_id) {
         return response.json();
     })
     .then(responseMsg => {
-        if (status == "202") {
+        if (status == "201") {
             // Successfully added item to cart
             console.log(`[ Status received: ${status} ]`);
             showMessageAddToCart(`Product "${product.title}" has been added to cart!`);

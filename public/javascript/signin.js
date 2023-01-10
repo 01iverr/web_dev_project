@@ -1,5 +1,3 @@
-const urlPOST = "http://localhost:8080/category.html"
-
 window.onload = init;
 
 function init() {
@@ -31,7 +29,7 @@ function init() {
             .then(responseMsg => {
                 console.log('[ Response Message: ]')
                 console.log(responseMsg);
-                if (status == "201") {
+                if (status == "200") {
                     // Successful sign in
                     console.log(`[ Status received: ${status} ]`);
                     let sessionId = responseMsg.sessionId;
