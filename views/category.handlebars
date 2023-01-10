@@ -4,22 +4,22 @@
         {{!-- <img id="add-to-cart-img" src="../media/catehory/shopping-cart.png" alt="A shopping cart icon created by Freepik - Flaticon"> --}}
         <div id="num-items-in-cart"></div>
     </button>
-    <form method="POST" id="signin-form" novalidate>
-        <fieldset id="signin-registration-form">
-            <legend>Sign in</legend>
+    <form method="POST" id="signin-form"  class="loginForm" novalidate>
+        <fieldset id="signin-registration-form" class="loginForm">
+            <legend class="loginForm">Sign in</legend>
 
             <div class="input-username" id="username-input">
-                <label for="profile-username">
-                  Username<abbr title="Necessary Field">(*)</abbr>:
+                <label for="profile-username" class="loginForm">
+                  Username:
                 </label>
-                <input type="username" id="profile-username" name="signin_Username" placeholder="Username" required>
+                <input  class="loginForm" type="username" id="profile-username" name="signin_Username" placeholder="Username" required>
             </div>
 
             <div class="input-password" id="password-input">
-                <label for="profile-password">
-                  Password<abbr title="Necessary Field">(*)</abbr>:
+                <label for="profile-password" class="loginForm">
+                  Password:
                 </label>
-                <input type="password" id="profile-password" name="signin_Password" required>
+                <input  placeholder="Secret code" class="loginForm" type="password" autocomplete="current-password" id="profile-password" name="signin_Password" required>
             </div>
 
             <div id="login-message"></div>
@@ -27,7 +27,7 @@
         </fieldset>
 
         <div class="buttons" id="signin-buttons">
-            <input type="submit" id="button-login-submit" name="submit">
+            <input type="submit"   value="Submit" class="buttonLogin" id="button-login-submit" name="submit">
         </div>
     </form>
     <div id="title"></div>
@@ -40,23 +40,23 @@
 </script>
 
 <script id="title-template" type="text/x-handlebars-template">
-    <h1>Product Category: \{{category_title}}</h1>
+    <h1 class="loginForm">Product Category: \{{category_title}}</h1>
 </script>
 
 <script id="subcategories-template" type="text/x-handlebars-template">
-    <p>Click bellow to apply filters:</p>
-    <ul id="subcategories-list">
-        <li class="subcategory">
+    <legend class="radiochoices">Click bellow to apply filters:</legend>
+    <ul id="subcategories-list" class="loginForm">
+        <li class="subcategory" class="loginForm">
             <label class="radiochoices" for="all">
                 <input type="radio" id="all" name="subcategory" value="all" checked="checked" onchange="filterProducts()">
-                <p>All</p>
+                    All
             </label>
         </li>
         \{{#each subcategories}}
-        <li class="subcategory">
+        <li class="subcategory" class="loginForm">
             <label class="radiochoices" for="\{{this.title}}">
                 <input type="radio" id="\{{this.title}}" name="subcategory" value="\{{this.title}}" onchange="filterProducts()">
-                <p>\{{this.title}}</p>
+                    \{{this.title}}
             </label>
         </li>
         \{{/each}}

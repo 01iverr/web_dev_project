@@ -1,0 +1,389 @@
+html {
+  scroll-behavior: smooth;
+  /* Allows a smooth animated "scroll effect" between elements within the scrolling box. */
+}
+
+/* Fonts */
+@font-face {
+  font-family: "CookieRegular";
+  src: url("../fonts/Cookie-Regular.ttf");
+}
+@font-face {
+  font-family: "LibreBaskerville";
+  src: url("../fonts/LibreBaskerville-Regular.ttf");
+}
+@font-face {
+  font-family: "Aileron";
+  src: url("../fonts/Aileron-Regular.otf");
+}
+@font-face {
+  font-family: "EkMukta";
+  src: url("../fonts/EkMukta-Regular.ttf");
+}
+/* @font-face {
+  font-family: "Lusgathi";
+  src: url("../fonts/Lusgathi-italic.otf");
+} */
+/* @font-face {
+  font-family: "Volumno";
+  src: url("../fonts/volumno.ttf");
+} */
+/* //////............... */
+
+h1 {
+  font-size: 45px;
+  color: #c50707;
+  text-align: center;
+  font-family: CookieRegular;
+}
+
+/*force placeholder appear in center*/
+::placeholder {
+   text-align: center;
+}
+
+button {
+  background: transparent;
+  border: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+}
+
+/* ########## HEADER ########## */
+header {
+  background-color: #ffff99;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  z-index: 1;
+}
+
+h1::before {
+  content: "\a";
+  white-space: pre;
+}
+
+/* ------------------------- */
+#home-button-image {
+  display: inline-block;
+  position: fixed;
+  background-image: url("../media/header-footer/techonomy-no-bg.png");
+  width: 300px;
+  height: 30px;
+  margin-top: 10px;
+  margin-left: 35px;
+}
+
+.search-bar {
+  display: inline-block;
+  margin: 25px 0px 0px 350px;
+}
+
+#search-button-image {
+  position: absolute;
+  background-image: url("../media/header-footer/magnifying-glass.png");
+  padding-right: 0;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  transform: translateX(3px);
+}
+
+#form-search {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  position: relative;
+  left: 5px;
+  top: -8px;
+}
+
+#search-query {
+  position: relative;
+  width: 375px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  top: -10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px;
+  border-radius: 6px;
+}
+
+#search-query:focus {
+  border: 2px solid #00cccc;
+  outline: none;
+}
+
+/* ########## FOOTER ########## */
+footer {
+  background-color: #ffff99;
+  width: 100%;
+  left: 0px;
+  position: absolute;
+}
+
+p.footerletters {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+/* FOOTER COMPANY INFO */
+#footer-company-info {
+  display: inline-block;
+  text-align: center;
+}
+
+/* FOOTER LOGO SOCIAL */
+#footer-logo-social {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+  right: 50px;
+  margin-top: 20px;
+}
+
+#footer-logo {
+  width: 330px;
+  height: auto;
+  content: url("../media/header-footer/techonomy-no-bg.png");
+}
+
+#footer-social {
+  margin-top: -15px;
+}
+
+#twitter-button-image,
+#instagram-button-image,
+#facebook-button-image,
+#youtube-button-image {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+#twitter-button-image {
+  background-image: url("../media/header-footer/twitter.png");
+  margin-right: 20px;
+}
+
+#instagram-button-image {
+  background-image: url("../media/header-footer/instagram.png");
+  margin-right: 20px;
+}
+
+#facebook-button-image {
+  background-image: url("../media/header-footer/facebook.png");
+  margin-right: 20px;
+}
+
+#youtube-button-image {
+  background-image: url("../media/header-footer/youtube.png");
+}
+
+/* FOOTER CONTACT TELEPHONE*/
+#footer-txt-contact {
+  font-size: 13px;
+}
+
+#slogan {
+  position: absolute;
+  right: 0;
+}
+
+
+/* ############LINKS################## */
+/* unvisited link */
+a:link {
+  color: #E61C1C;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: purple;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: green;
+  text-decoration: underline;
+}
+
+a:active {
+  color: #00FF7F;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a.tel {
+  color: black;
+}
+
+a.tel:hover {
+  color: maroon;
+}
+
+
+/* ########## index page ########## */
+
+#index {
+  margin: 80px 30px 50px 30px;
+}
+
+#index img {
+  float: left;
+  margin: -3px 25px 0px 5px;
+  width: auto;
+  height: 350px;
+  margin-left: 40px;
+}
+
+section.category-section {
+  width: 30%;
+  text-align: center;
+  text-indent: 0;
+  box-sizing:border-box;
+  border: 8px solid #ffff99;
+  display: inline-block;
+  box-shadow: 15px 10px #ffff99;
+  margin-left: 20px;
+}
+p.category-section {
+  font-family: "LibreBaskerville";
+  font-size: 25px;
+}
+
+/* ########## sign in - form########## */
+form.loginForm {
+  width: 300px;
+  height: 195px;
+  left: 78%;
+  border-radius: 8px;
+  box-shadow: 15px 10px #888888;
+  text-align: left;
+  border: 3px solid #ffff99;
+  background-color: #ffff99;
+  box-sizing:border-box;
+  display: block;
+  position:relative;
+}
+
+fieldset.loginForm{
+  border: 0px;
+}
+
+legend.loginForm{
+  font-family: "EkMukta";
+  font-size: 20px;
+  text-align: center;
+}
+
+input.loginForm {
+  font-family: "EkMukta";
+  font-weight: lighter;
+  box-sizing: border-box;
+  border: 0px;
+  width: 150px;
+  border-radius: 6px;
+  margin-left:-50px;
+}
+
+input.loginForm:focus {
+  border: 2px solid #00cccc;
+  outline: none;
+}
+
+label {
+  font-family: "Aileron";
+  display: inline-block;
+  margin: 7px;
+  width: 120px;
+  margin-left:30px;
+  cursor:pointer;
+  font-size: 13px;
+  text-align: left;
+}
+
+label.loginForm {
+  margin-left: 10px;
+}
+
+input.buttonLogin {
+  background: transparent;
+  border: none;
+  color: Darkred;
+  font-family: CookieRegular;
+  font-style: oblique;
+  font-size: 25px;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 140px;
+}
+
+input.loginForm:not(:focus):not(:placeholder-shown):invalid {
+  background-color: #ffdddd;
+  border: 2px solid #cc0000;
+}
+
+input.loginForm:not(:placeholder-shown):valid {
+  background-color: #98FB98;
+  border: 2px solid #00FF7F;
+}
+
+/* end of sign in form */
+
+h1.loginForm{
+  margin-top: -230px;
+}
+
+
+ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+legend.radiochoices {
+  display: block;
+  text-align: left;
+  font-family: "LibreBaskerville";
+  font-size: 15px;
+  color:#081f37;
+}
+
+label.radiochoices {
+  display: block;
+  float: left;
+  clear: right;
+  text-align: left;
+  margin-left: -10px;
+  margin-top: auto;
+}
+
+input[type='radio']:checked:after {
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: lightgreen;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}

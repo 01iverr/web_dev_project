@@ -6,7 +6,7 @@
 <script id="categories-template" type="text/x-handlebars-template">
     \{{#each categories}}
         <section class="category-section">
-            \{{this.title}}
+            <p class="category-section"> \{{this.title}} </p>
             <a href="/category.html?categoryId=\{{this.id}}"><img src="\{{this.img_url}}"></a>
         </section>
     \{{/each}}
