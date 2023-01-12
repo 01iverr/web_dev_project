@@ -1,6 +1,7 @@
 <main id="category-products">
     <br><br><br>
     <button id="view-cart" onclick="goToCart()">
+        <img class="cart" src="../media/shopping-cart-white.png">
         <div id="num-items-in-cart"></div>
     </button>
     <form method="POST" id="signin-form"  class="loginForm" novalidate>
@@ -73,7 +74,9 @@
             \{{this.description}}
             <br>
             <div id="price"> Cost:  \{{this.cost}}  $   &nbsp; &nbsp;</div>
-            <button id="cart-button-image" type="button" onclick="addToCart(\{{this.id}})"></button>
+            <button id="add-cart-button" type="button" onclick="addToCart(\{{this.id}})">
+                <img class="cart" src="../media/shopping-cart-white.png">
+            </button>
         </div>
     \{{/each}}
 </script>

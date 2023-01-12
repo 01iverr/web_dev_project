@@ -334,6 +334,13 @@ function goToCart() {
   let username = urlParams.get("username");
   let sessionId = urlParams.get("sessionId");
 
+  // Check user is logged in
+  if (!username || !sessionId) {
+    console.log("[ User not logged in: can't view cart ]");
+    alert("Please login to view cart.");
+    return;
+}
+
   window.location.href = urlGET+"cart.html?username="+username+"&sessionId="+sessionId;
 }
 
