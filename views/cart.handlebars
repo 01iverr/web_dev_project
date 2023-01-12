@@ -9,7 +9,7 @@
         <thead>
           <tr>
             \{{#each details}}
-              <th>\{{this}}</th
+              <th class="headers">\{{this}}</th>
             \{{/each}}
           </tr>
         </thead>
@@ -17,14 +17,16 @@
           \{{#each products}}
             <tr>
                 <td>\{{this.title}}</td>
-                <td>\{{this.cost}}</td>
-                <td>\{{this.quantity}}</td>
+                <td class="prices" id="c" >\{{this.cost}} $ </td>
+                <td >\{{this.quantity}}</td>
             </tr>
           \{{/each}}
         </tbody>
         </table>
-        <p> Total cost : \{{totalcost}} </p>
+        <p id="totalcostt" > Total cost : <span  id="tc" class="prices">\{{totalcost}} $<span> </p>
     \{{/if}}
   </script>
+
+  <img id="photowithcart" src="../media/cartimage.png" alt="Person who is running with a cart">
 
 <script type="text/javascript" src="../javascript/cart.js"></script>

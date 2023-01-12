@@ -1,7 +1,6 @@
 <main id="category-products">
     <br><br><br>
     <button id="view-cart" onclick="goToCart()">
-        {{!-- <img id="add-to-cart-img" src="../media/catehory/shopping-cart.png" alt="A shopping cart icon created by Freepik - Flaticon"> --}}
         <div id="num-items-in-cart"></div>
     </button>
     <form method="POST" id="signin-form"  class="loginForm" novalidate>
@@ -30,6 +29,7 @@
             <input type="submit"   value="Submit" class="buttonLogin" id="button-login-submit" name="submit">
         </div>
     </form>
+
     <div id="title"></div>
     <aside id="filters"></aside>
     <article id="products"></article>
@@ -61,24 +61,26 @@
         </li>
         \{{/each}}
     </ul>
+    <br><br><br><br>
 </script>
 
 
 <script id="product-template" type="text/x-handlebars-template">
     \{{#each products}}
         <div class="product">
-            <h2>\{{this.title}}</h2>
-            <img src="\{{this.image}}" width="200px">
+            <h2 class="Prodtitle">\{{this.title}}</h2>
+            <img class="productImg" src="\{{this.image}}" >
             \{{this.description}}
-            <div id="price">\{{this.cost}}</div>
-            <button type="button" onclick="addToCart(\{{this.id}})">Add to Cart</button>
+            <br>
+            <div id="price"> Cost:  \{{this.cost}}  $   &nbsp; &nbsp;</div>
+            <button id="cart-button-image" type="button" onclick="addToCart(\{{this.id}})"></button>
         </div>
     \{{/each}}
 </script>
 
 <script id="login-message-template" type="text/x-handlebars-template">
     \{{#if login_attempt}}
-        <p id="login-result">\{{login_message}}</p>
+        <span id="login-result">\{{login_message}}</span>
     \{{/if}}
 </script>
 

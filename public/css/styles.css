@@ -2,7 +2,6 @@ html {
   scroll-behavior: smooth;
   /* Allows a smooth animated "scroll effect" between elements within the scrolling box. */
 }
-
 /* Fonts */
 @font-face {
   font-family: "CookieRegular";
@@ -20,15 +19,14 @@ html {
   font-family: "EkMukta";
   src: url("../fonts/EkMukta-Regular.ttf");
 }
-/* @font-face {
+@font-face {
   font-family: "Lusgathi";
   src: url("../fonts/Lusgathi-italic.otf");
-} */
-/* @font-face {
+}
+@font-face {
   font-family: "Volumno";
   src: url("../fonts/volumno.ttf");
-} */
-/* //////............... */
+}
 
 h1 {
   font-size: 45px;
@@ -279,7 +277,7 @@ p.category-section {
 /* ########## sign in - form########## */
 form.loginForm {
   width: 300px;
-  height: 195px;
+  height: 160px;
   left: 78%;
   border-radius: 8px;
   box-shadow: 15px 10px #888888;
@@ -289,6 +287,7 @@ form.loginForm {
   box-sizing:border-box;
   display: block;
   position:relative;
+  margin-top: -30px;
 }
 
 fieldset.loginForm{
@@ -336,27 +335,15 @@ input.buttonLogin {
   border: none;
   color: Darkred;
   font-family: CookieRegular;
-  font-style: oblique;
   font-size: 25px;
   cursor: pointer;
-  display: inline-block;
-  margin-left: 140px;
-}
-
-input.loginForm:not(:focus):not(:placeholder-shown):invalid {
-  background-color: #ffdddd;
-  border: 2px solid #cc0000;
-}
-
-input.loginForm:not(:placeholder-shown):valid {
-  background-color: #98FB98;
-  border: 2px solid #00FF7F;
+  margin-left: 170px;
 }
 
 /* end of sign in form */
 
 h1.loginForm{
-  margin-top: -230px;
+  margin-top: -150px;
 }
 
 
@@ -394,4 +381,102 @@ input[type='radio']:checked:after {
   display: inline-block;
   visibility: visible;
   border: 2px solid white;
+}
+
+img.productImg {
+  width: auto;
+  height: 350px;
+  margin-left: 30px;
+  display:block;
+}
+
+/* /Inside a category/ */
+div.product {
+  width: 30%;
+  text-align: center;
+  text-indent: 0;
+  box-sizing: border-box;
+  border: 8px solid #ffff99;
+  display: inline-block;
+  box-shadow: 15px 10px #ffff99;
+  margin-left:10vw;
+  margin-bottom:30px;
+}
+
+#price {
+  font-family: "Lusgathi";
+  text-align: left;
+  font-size: 24px;
+  display:inline-block;
+}
+
+h2.Prodtitle {
+  display:block;
+  font-family: "CookieRegular";
+  font-size: 20px;
+}
+
+#cart-button-image , #view-cart {
+  display: inline-block;
+  background-image: url("../media/header-footer/shopping-cart.png");
+  width: 30px;
+  height: 30px;
+}
+
+#num-items-in-cart{
+  margin-left: 30px;
+}
+
+/* /SEE YOUR CART PAGE/ */
+
+table{
+  margin-top: 30px;
+  margin-left:5vw;
+}
+
+th {
+  height: 70px;
+  text-align: left;
+}
+
+th, td {
+  padding: 20px;
+}
+
+th.headers{
+  /* text-align: center; */
+  font-family: "Aileron";
+  color: #A72024;
+  font-size: 20px;
+}
+
+td.prices , span.prices{
+  font-family: "Lusgathi";
+  text-align: right;
+}
+
+#c{
+  font-size: 17px;
+}
+
+#tc{
+  font-size:35px;
+  color:#008000;
+}
+
+#totalcostt{
+  margin-top: -200px;
+  margin-left:70vw;
+  font-size: 35px;
+}
+
+tr:hover {
+  background-color: #90EE90;
+}
+
+#photowithcart{
+    float:right;
+    margin-top:-600px;
+    margin-left: 45vw;
+    width: 40%;
 }
